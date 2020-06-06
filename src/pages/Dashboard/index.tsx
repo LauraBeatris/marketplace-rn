@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import React, { useState, useEffect } from "react";
+import FeatherIcon from "react-native-vector-icons/Feather";
+import { View, Alert } from "react-native";
 
-import { View, Alert } from 'react-native';
-
-import formatValue from '../../utils/formatValue';
-import { useCart } from '../../hooks/cart';
-import api from '../../services/api';
-
-import FloatingCart from '../../components/FloatingCart';
-
+import formatValue from "../../utils/formatValue";
+import { useCart } from "../../hooks/cart";
+import api from "../../services/api";
+import FloatingCart from "../../components/FloatingCart";
 import {
   Container,
   ProductContainer,
@@ -19,7 +16,7 @@ import {
   PriceContainer,
   ProductPrice,
   ProductButton,
-} from './styles';
+} from "./styles";
 
 interface Product {
   id: string;
@@ -35,11 +32,11 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadProducts(): Promise<void> {
       try {
-        const response = await api.get('/products');
+        const response = await api.get("/products");
         setProducts(response.data);
       } catch (error) {
         Alert.alert(
-          'There was an error while listing products. Please, try to reload the screen',
+          "There was an error while listing products. Please, try to reload the screen",
         );
       }
     }

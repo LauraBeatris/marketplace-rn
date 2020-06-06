@@ -5,11 +5,11 @@ import React, {
   useContext,
   useMemo,
   useEffect,
-} from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+} from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 
-import formatValue from '../utils/formatValue';
-import { CART_PRODUCTS_STORAGE_KEY } from '../constants/asyncStorage';
+import formatValue from "../utils/formatValue";
+import { CART_PRODUCTS_STORAGE_KEY } from "../constants/asyncStorage";
 
 interface Product {
   id: string;
@@ -21,7 +21,7 @@ interface Product {
 
 interface CartContext {
   products: Product[];
-  addToCart(item: Omit<Product, 'quantity'>): void;
+  addToCart(item: Omit<Product, "quantity">): void;
   increment(id: string): void;
   decrement(id: string): void;
   removeProduct(id: string): void;
@@ -181,7 +181,7 @@ function useCart(): CartContext {
   const context = useContext(CartContext);
 
   if (!context) {
-    throw new Error(`useCart must be used within a CartProvider`);
+    throw new Error("useCart must be used within a CartProvider");
   }
 
   return context;
