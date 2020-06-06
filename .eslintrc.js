@@ -5,7 +5,6 @@ module.exports = {
   extends: [
     "airbnb",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
@@ -18,7 +17,7 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json"
   },
-  plugins: ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  plugins: ["react", "react-hooks", "@typescript-eslint"],
   rules: {
     "space-before-function-paren": 0,
     quotes: [2, "double", "avoid-escape"],
@@ -74,7 +73,6 @@ module.exports = {
         tsx: "never"
       }
     ],
-    "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
@@ -89,6 +87,7 @@ module.exports = {
         "allowExpressions": true
       }
     ],
+    "@typescript-eslint/no-empty-interface": "off"
   },
   settings: {
     "import/resolver": {
