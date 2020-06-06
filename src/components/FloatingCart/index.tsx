@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useContext } from "react";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "styled-components";
 
-import formatValue from "../../utils/formatValue";
 import { useCart } from "../../hooks/cart";
 import {
   Container,
@@ -14,15 +14,24 @@ import {
 
 const FloatingCart: React.FC = () => {
   const navigation = useNavigation();
+  const theme = useContext(ThemeContext);
   const { totalProductsQuantity, totalProductsPrice } = useCart();
+
+  const handleNavigation = (): void => {
+    navigation.navigate("Cart");
+  };
 
   return (
     <Container>
       <CartButton
         testID="navigate-to-cart-button"
-        onPress={() => navigation.navigate("Cart")}
+        onPress={handleNavigation}
       >
-        <FeatherIcon name="shopping-cart" size={24} color="#fff" />
+        <FeatherIcon
+          name="shopping-cart"
+          size={24}
+          color={theme.colors.blueSecondary}
+        />
         <CartButtonText>{`${totalProductsQuantity} itens`}</CartButtonText>
       </CartButton>
 

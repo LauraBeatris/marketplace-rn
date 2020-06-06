@@ -56,9 +56,7 @@ const CartProvider: React.FC = ({ children }) => {
   }, []);
 
   const findProductById = useCallback(
-    (id: string) => {
-      return products.find(product => product.id === id);
-    },
+    (id: string) => products.find(product => product.id === id),
     [products],
   );
 
@@ -69,16 +67,16 @@ const CartProvider: React.FC = ({ children }) => {
       setProducts(prevProducts => {
         const updatedProducts = foundProduct
           ? prevProducts.map(prevProduct => ({
-              ...prevProduct,
-              quantity: prevProduct.quantity + 1,
-            }))
+            ...prevProduct,
+            quantity: prevProduct.quantity + 1,
+          }))
           : [
-              ...prevProducts,
-              {
-                ...product,
-                quantity: 1,
-              },
-            ];
+            ...prevProducts,
+            {
+              ...product,
+              quantity: 1,
+            },
+          ];
 
         saveProducts(updatedProducts);
         return updatedProducts;
@@ -137,21 +135,17 @@ const CartProvider: React.FC = ({ children }) => {
     [products, saveProducts],
   );
 
-  const totalProductsPrice = useMemo(() => {
-    return formatValue(
-      products.reduce(
-        (totalPrice, product) => totalPrice + product.price * product.quantity,
-        0,
-      ),
-    );
-  }, [products]);
-
-  const totalProductsQuantity = useMemo(() => {
-    return products.reduce(
-      (totalQuantity, product) => totalQuantity + product.quantity,
+  const totalProductsPrice = useMemo(() => formatValue(
+    products.reduce(
+      (totalPrice, product) => totalPrice + product.price * product.quantity,
       0,
-    );
-  }, [products]);
+    ),
+  ), [products]);
+
+  const totalProductsQuantity = useMemo(() => products.reduce(
+    (totalQuantity, product) => totalQuantity + product.quantity,
+    0,
+  ), [products]);
 
   const value = useMemo(
     () => ({

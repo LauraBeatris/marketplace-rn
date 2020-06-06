@@ -3,13 +3,12 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   position: absolute;
   bottom: 0px;
-
   flex-direction: row;
-  background: #e83f5b;
-
+  background: ${({ theme }) => theme.colors.white};
   padding: 0 20px;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
 `;
 
 export const CartPricing = styled.Text`
@@ -18,13 +17,13 @@ export const CartPricing = styled.Text`
 
 export const CartTotalPrice = styled.Text`
   font-size: 16px;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.blueSecondary};
   font-weight: bold;
 `;
 
 export const CartButton = styled.TouchableOpacity`
   flex-direction: row;
-  background: #e83f5b;
+  background: ${({ theme }) => theme.colors.white};
 
   flex: 1;
   padding: 20px 20px;
@@ -34,7 +33,7 @@ export const CartButton = styled.TouchableOpacity`
 
 export const CartButtonText = styled.Text`
   font-weight: bold;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.blueSecondary};
   margin-left: 15px;
   flex: 1;
   margin-right: auto;

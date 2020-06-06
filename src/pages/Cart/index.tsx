@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { View } from "react-native";
+import { ThemeContext } from "styled-components";
 
 import { useCart } from "../../hooks/cart";
 import formatValue from "../../utils/formatValue";
 import FloatingCart from "../../components/FloatingCart";
 import {
-  Container,
+  MainContainer,
+  GradientContainer,
+} from "../../styles/components/Containers";
+import {
   ProductContainer,
   ProductContent,
   ProductList,
@@ -24,7 +28,13 @@ import {
 import { Product } from "./types";
 
 const Cart: React.FC = () => {
-  const { increment, decrement, removeProduct, products } = useCart();
+  const theme = useContext(ThemeContext);
+  const {
+    increment,
+    decrement,
+    removeProduct,
+    products,
+  } = useCart();
 
   const handleIncrement = (id: string) => (): void => {
     increment(id);
@@ -40,57 +50,67 @@ const Cart: React.FC = () => {
   };
 
   return (
-    <Container>
-      <ProductContainer>
-        <ProductList
-          data={products}
-          keyExtractor={item => item.id}
-          ListFooterComponent={<View />}
-          ListFooterComponentStyle={{
-            height: 80,
-          }}
-          renderItem={({ item }: { item: Product }) => {
-            const singleProductPrice = formatValue(item.price);
-            const totalProductPrice = formatValue(item.price * item.quantity);
-            const productImageUrl = { uri: item.image_url };
+    <GradientContainer>
+      <MainContainer>
+        <ProductContainer>
+          <ProductList
+            data={products}
+            keyExtractor={item => item.id}
+            ListFooterComponent={<View />}
+            ListFooterComponentStyle={{
+              height: 80,
+            }}
+            renderItem={({ item }: { item: Product }) => {
+              const singleProductPrice = formatValue(item.price);
+              const totalProductPrice = formatValue(item.price * item.quantity);
+              const productImageUrl = { uri: item.image_url };
 
-            return (
-              <ProductContent>
-                <ProductImage source={productImageUrl} />
-                <ProductTitleContainer>
-                  <ProductTitle>{item.title}</ProductTitle>
-                  <ProductPriceContainer>
-                    <ProductSinglePrice>
-                      {singleProductPrice}
-                    </ProductSinglePrice>
+              return (
+                <ProductContent>
+                  <ProductImage source={productImageUrl} />
+                  <ProductTitleContainer>
+                    <ProductTitle>{item.title}</ProductTitle>
+                    <ProductPriceContainer>
+                      <ProductSinglePrice>
+                        {singleProductPrice}
+                      </ProductSinglePrice>
 
-                    <TotalContainer>
-                      <ProductQuantity>{`${item.quantity}x `}</ProductQuantity>
-                      <ProductPrice>{totalProductPrice}</ProductPrice>
-                    </TotalContainer>
-                  </ProductPriceContainer>
-                </ProductTitleContainer>
-                <ActionContainer>
-                  <ActionButton
-                    testID={`increment-${item.id}`}
-                    onPress={handleIncrement(item.id)}
-                  >
-                    <FeatherIcon name="plus" color="#E83F5B" size={16} />
-                  </ActionButton>
-                  <ActionButton
-                    testID={`decrement-${item.id}`}
-                    onPress={handleDecrement(item)}
-                  >
-                    <FeatherIcon name="minus" color="#E83F5B" size={16} />
-                  </ActionButton>
-                </ActionContainer>
-              </ProductContent>
-            );
-          }}
-        />
-      </ProductContainer>
-      <FloatingCart />
-    </Container>
+                      <TotalContainer>
+                        <ProductQuantity>{`${item.quantity}x `}</ProductQuantity>
+                        <ProductPrice>{totalProductPrice}</ProductPrice>
+                      </TotalContainer>
+                    </ProductPriceContainer>
+                  </ProductTitleContainer>
+                  <ActionContainer>
+                    <ActionButton
+                      testID={`increment-${item.id}`}
+                      onPress={handleIncrement(item.id)}
+                    >
+                      <FeatherIcon
+                        name="plus"
+                        color={theme.colors.blueSecondary}
+                        size={16}
+                      />
+                    </ActionButton>
+                    <ActionButton
+                      testID={`decrement-${item.id}`}
+                      onPress={handleDecrement(item)}
+                    >
+                      <FeatherIcon
+                        name="minus"
+                        color={theme.colors.blueSecondary}
+                        size={16}
+                      />
+                    </ActionButton>
+                  </ActionContainer>
+                </ProductContent>
+              );
+            }}
+          />
+        </ProductContainer>
+        <FloatingCart />
+      </MainContainer>
+    </GradientContainer>
   );
 };
 

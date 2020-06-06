@@ -1,5 +1,8 @@
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { FlatList } from "react-native";
+import { transparentize } from "polished";
+
+import { Product } from "./types";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -34,7 +37,7 @@ export const ProductImage = styled.Image`
 
 export const ProductTitleContainer = styled.View`
   font-size: 16px;
-  margin-left: 5px;
+  margin-left: 12px;
 `;
 
 export const ProductTitle = styled.Text`
@@ -61,7 +64,7 @@ export const ProductPrice = styled.Text`
   margin-top: 5px;
 
   font-size: 16px;
-  color: #e83f5b;
+  color: ${({ theme }) => theme.colors.bluePrimary};
 `;
 
 export const ProductQuantity = styled.Text`
@@ -70,7 +73,7 @@ export const ProductQuantity = styled.Text`
   margin-right: 10px;
 
   font-size: 16px;
-  color: #e83f5b;
+  color: ${({ theme }) => theme.colors.bluePrimary};
 `;
 
 export const ActionContainer = styled.View`
@@ -82,7 +85,9 @@ export const ActionContainer = styled.View`
 `;
 
 export const ActionButton = styled.TouchableOpacity`
-  background: rgba(232, 63, 91, 0.1);
+  ${({ theme }) => css`
+    background: ${transparentize(0.6, theme.colors.bluePrimary)};
+  `}
   border-radius: 5px;
   padding: 12px;
   margin-bottom: 5px;
@@ -93,7 +98,7 @@ export const TotalProductsContainer = styled.View`
   bottom: 0px;
 
   flex-direction: row;
-  background: #e83f5b;
+  background: ${({ theme }) => theme.colors.bluePrimary};
 
   padding: 20px 40px;
   justify-content: space-between;

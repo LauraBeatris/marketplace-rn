@@ -6,8 +6,13 @@ import formatValue from "../../utils/formatValue";
 import { useCart } from "../../hooks/cart";
 import api from "../../services/api";
 import FloatingCart from "../../components/FloatingCart";
+import Box from "../../components/Box";
+import Categories from "../../components/Categories";
 import {
-  Container,
+  MainContainer,
+  GradientContainer,
+} from "../../styles/components/Containers";
+import {
   ProductContainer,
   ProductImage,
   ProductList,
@@ -49,39 +54,52 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <Container>
-      <ProductContainer>
-        <ProductList
-          data={products}
-          keyExtractor={item => item.id}
-          ListFooterComponent={<View />}
-          ListFooterComponentStyle={{
-            height: 80,
-          }}
-          renderItem={({ item }) => {
-            const productImageUri = { uri: item.image_url };
-            const productPrice = formatValue(item.price);
+    <GradientContainer>
+      <MainContainer>
+        <ProductContainer>
+          <ProductList
+            data={products}
+            ListHeaderComponent={(
+              <View>
+                <Box
+                  productName={products.title}
+                  productPrice={products.price}
+                  productPhotoUrl={products.image_url}
+                  isNew
+                />
+                <Categories />
+              </View>
+            )}
+            keyExtractor={item => item.id}
+            ListFooterComponent={<View />}
+            ListFooterComponentStyle={{
+              height: 80,
+            }}
+            renderItem={({ item }) => {
+              const productImageUri = { uri: item.image_url };
+              const productPrice = formatValue(item.price);
 
-            return (
-              <Product>
-                <ProductImage source={productImageUri} />
-                <ProductTitle>{item.title}</ProductTitle>
-                <PriceContainer>
-                  <ProductPrice>{productPrice}</ProductPrice>
-                  <ProductButton
-                    testID={`add-to-cart-${item.id}`}
-                    onPress={handleAddToCart(item)}
-                  >
-                    <FeatherIcon size={20} name="plus" color="#C4C4C4" />
-                  </ProductButton>
-                </PriceContainer>
-              </Product>
-            );
-          }}
-        />
-      </ProductContainer>
-      <FloatingCart />
-    </Container>
+              return (
+                <Product>
+                  <ProductImage source={productImageUri} />
+                  <ProductTitle>{item.title}</ProductTitle>
+                  <PriceContainer>
+                    <ProductPrice>{productPrice}</ProductPrice>
+                    <ProductButton
+                      testID={`add-to-cart-${item.id}`}
+                      onPress={handleAddToCart(item)}
+                    >
+                      <FeatherIcon size={20} name="plus" color="#C4C4C4" />
+                    </ProductButton>
+                  </PriceContainer>
+                </Product>
+              );
+            }}
+          />
+        </ProductContainer>
+        <FloatingCart />
+      </MainContainer>
+    </GradientContainer>
   );
 };
 
