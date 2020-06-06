@@ -3,7 +3,7 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 import { View, Alert } from "react-native";
 
 import formatValue from "../../utils/formatValue";
-import { useCart } from "../../hooks/cart";
+import { useCart } from "../../context/cart/CartContext";
 import api from "../../services/api";
 import FloatingCart from "../../components/FloatingCart";
 import Box from "../../components/Box";
@@ -62,9 +62,9 @@ const Dashboard: React.FC = () => {
             ListHeaderComponent={(
               <View>
                 <Box
-                  productName={products[0].title}
-                  productPrice={products[0].price}
-                  productPhotoUrl={products[0].image_url}
+                  productName={products[0]?.title}
+                  productPrice={products[0]?.price}
+                  productPhotoUrl={products[0]?.image_url}
                   isNew
                 />
                 <Categories />
