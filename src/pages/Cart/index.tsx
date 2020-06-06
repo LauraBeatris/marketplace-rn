@@ -3,7 +3,7 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 import { View } from "react-native";
 import { ThemeContext } from "styled-components";
 
-import { useCart } from "../../hooks/cart";
+import { useCart } from "../../context/cart/CartContext";
 import formatValue from "../../utils/formatValue";
 import FloatingCart from "../../components/FloatingCart";
 import {

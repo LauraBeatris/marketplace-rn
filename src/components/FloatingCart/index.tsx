@@ -4,7 +4,7 @@ import FeatherIcon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "styled-components";
 
-import { useCart } from "../../hooks/cart";
+import { useCart } from "../../context/cart/CartContext";
 import {
   Container,
   CartPricing,

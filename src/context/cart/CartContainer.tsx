@@ -1,37 +1,17 @@
 import React, {
-  createContext,
   useState,
   useCallback,
-  useContext,
   useMemo,
   useEffect,
 } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 
-import formatValue from "../utils/formatValue";
-import { CART_PRODUCTS_STORAGE_KEY } from "../constants/asyncStorage";
+import formatValue from "../../utils/formatValue";
+import { CART_PRODUCTS_STORAGE_KEY } from "../../constants/asyncStorage";
+import { CartProvider } from "./CartContext";
+import { Product } from "./types";
 
-interface Product {
-  id: string;
-  title: string;
-  image_url: string;
-  price: number;
-  quantity: number;
-}
-
-interface CartContext {
-  products: Product[];
-  addToCart(item: Omit<Product, "quantity">): void;
-  increment(id: string): void;
-  decrement(id: string): void;
-  removeProduct(id: string): void;
-  totalProductsQuantity: number;
-  totalProductsPrice: string;
-}
-
-const CartContext = createContext<CartContext | null>(null);
-
-const CartProvider: React.FC = ({ children }) => {
+const CartContainer: React.FC = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -168,17 +148,7 @@ const CartProvider: React.FC = ({ children }) => {
     ],
   );
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return <CartProvider value={value}>{children}</CartProvider>;
 };
 
-function useCart(): CartContext {
-  const context = useContext(CartContext);
-
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-
-  return context;
-}
-
-export { CartProvider, useCart };
+export default CartContainer;
