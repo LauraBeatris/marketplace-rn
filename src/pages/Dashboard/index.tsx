@@ -62,9 +62,9 @@ const Dashboard: React.FC = () => {
             ListHeaderComponent={(
               <View>
                 <Box
-                  productName={products.title}
-                  productPrice={products.price}
-                  productPhotoUrl={products.image_url}
+                  productName={products[0].title}
+                  productPrice={products[0].price}
+                  productPhotoUrl={products[0].image_url}
                   isNew
                 />
                 <Categories />
