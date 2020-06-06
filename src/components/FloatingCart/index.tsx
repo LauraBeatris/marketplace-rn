@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
+import pluralize from "pluralize";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "styled-components";
@@ -21,6 +22,8 @@ const FloatingCart: React.FC = () => {
     navigation.navigate("Cart");
   };
 
+  const totalProductsQuantityMessage = useMemo(() => `${totalProductsQuantity} ${pluralize("item", totalProductsQuantity)}`, [totalProductsQuantity]);
+
   return (
     <Container>
       <CartButton
@@ -32,7 +35,7 @@ const FloatingCart: React.FC = () => {
           size={24}
           color={theme.colors.blueSecondary}
         />
-        <CartButtonText>{`${totalProductsQuantity} itens`}</CartButtonText>
+        <CartButtonText>{totalProductsQuantityMessage}</CartButtonText>
       </CartButton>
 
       <CartPricing>
