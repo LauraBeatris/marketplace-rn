@@ -2,26 +2,26 @@
   "products": [
     {
       "id": "123",
-      "title": "Nome do produto 01",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "Kindle",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/41pU53HAjVL._AC_SY200_.jpg",
       "price": 50
     },
     {
       "id": "1234",
-      "title": "Nome do produto 02",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "Xiaomi Miband 4",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/41ckaxkIxEL._AC_SY200_.jpg",
       "price": 60
     },
     {
       "id": "12345",
-      "title": "Nome do produto 03",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "Razer Headset Kraken X",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/31LsJuF1X-L._AC_SY200_.jpg",
       "price": 70
     },
     {
       "id": "123456",
-      "title": "Nome do produto 04",
-      "image_url": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/camiseta-ecommerce.jpg",
+      "title": "Razer Blackwidow Tournament",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/51boF8sjrDL._AC_SY200_.jpg",
       "price": 80
     }
   ]
