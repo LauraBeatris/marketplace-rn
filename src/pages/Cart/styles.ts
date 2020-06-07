@@ -7,17 +7,17 @@ import { Product } from "./types";
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
+  justify-content: center;
 `;
 
 export const ProductContainer = styled.View`
   border-radius: 5px;
   margin-top: 60px;
-  flex: 1;
   flex-direction: row;
+  width: 100%;
 `;
 
 export const ProductList = styled(FlatList as new () => FlatList<Product>)`
-  flex: 1;
   padding: 0 10px;
 `;
 
@@ -26,7 +26,6 @@ export const ProductContent = styled.View`
   padding: 15px 10px;
   border-radius: 5px;
   margin: 5px;
-  flex: 1;
   flex-direction: row;
 `;
 
@@ -42,6 +41,7 @@ export const ProductTitleContainer = styled.View`
 
 export const ProductTitle = styled.Text`
   font-size: 16px;
+  max-width: 200px;
 `;
 
 export const ProductPriceContainer = styled.View`
