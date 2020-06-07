@@ -114,19 +114,23 @@ const CartContainer: React.FC = ({ children }) => {
     [],
   );
 
-  const totalProductsPrice = useMemo(() => formatValue(
-    products.reduce(
-      (totalPrice, product) => {
-        const productSubtotal = product.price * product.quantity;
-        return totalPrice + productSubtotal;
-      },
-      0,
-    ),
+  const totalProductsPrice = useMemo(() => (
+    formatValue(
+      products.reduce(
+        (totalPrice, product) => {
+          const productSubtotal = product.price * product.quantity;
+          return totalPrice + productSubtotal;
+        },
+        0,
+      ),
+    )
   ), [products]);
 
-  const totalProductsQuantity = useMemo(() => products.reduce(
-    (totalQuantity, product) => totalQuantity + product.quantity,
-    0,
+  const totalProductsQuantity = useMemo(() => (
+    products.reduce(
+      (totalQuantity, product) => totalQuantity + product.quantity,
+      0,
+    )
   ), [products]);
 
   const value = useMemo(
