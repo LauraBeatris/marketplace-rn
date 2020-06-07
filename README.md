@@ -35,7 +35,7 @@
 * Explore products
 * Add products to cart
 
-It's important to mention that the products data are retrieved by a fake API using a package called
+It's important to mention that the products data are retrieved from a fake API using a package called
 [JSON Server](https://github.com/typicode/json-server).
 
 # :construction_worker: Installation
@@ -54,7 +54,7 @@ SSH URLs provide access to a Git repository via SSH, a secure protocol. If you h
 
 **Install IOS native dependencies**
 
-```cd ios && pod install``
+```cd ios && pod install```
 
 After copying the examples, make sure to fill the variables with new values.
 
