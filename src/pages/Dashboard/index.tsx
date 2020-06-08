@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { View, Alert } from "react-native";
+import { View, Alert, Animated } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
 import formatValue from "../../utils/formatValue";
 import { useCart } from "../../context/cart/CartContext";
@@ -33,6 +34,11 @@ interface Product {
 const Dashboard: React.FC = () => {
   const { addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
+  const productListOffset = useRef(new Animated.ValueXY({
+    x: 50,
+    y: 0,
+  })).current;
+  const productListOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
@@ -45,9 +51,25 @@ const Dashboard: React.FC = () => {
         );
       }
     }
-
     loadProducts();
   }, []);
+
+  useFocusEffect(() => {
+    Animated.parallel([
+      Animated.spring(productListOffset, {
+        toValue: 0,
+        speed: 2,
+        bounciness: 3,
+        useNativeDriver: false,
+      }),
+
+      Animated.timing(productListOpacity, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  });
 
   const handleAddToCart = (item: Product) => (): void => {
     addToCart(item);
@@ -57,45 +79,57 @@ const Dashboard: React.FC = () => {
     <GradientContainer>
       <MainContainer>
         <ProductContainer>
-          <ProductList
-            data={products}
-            ListHeaderComponent={(
-              <View>
-                <Box
-                  productName={products[0]?.title}
-                  productPrice={products[0]?.price}
-                  productPhotoUrl={products[0]?.image_url}
-                  isNew
-                />
-                <Categories />
-              </View>
-            )}
-            keyExtractor={item => item.id}
-            ListFooterComponent={<View />}
-            ListFooterComponentStyle={{
-              height: 80,
-            }}
-            renderItem={({ item }) => {
-              const productImageUri = { uri: item.image_url };
-              const productPrice = formatValue(item.price);
+          <Animated.View style={[
+            {
+              transform: [
+                ...productListOffset?.getTranslateTransform(),
+              ],
+            },
+            {
+              opacity: productListOpacity,
+            },
+          ]}
+          >
+            <ProductList
+              data={products}
+              ListHeaderComponent={(
+                <View>
+                  <Box
+                    productName={products[0]?.title}
+                    productPrice={products[0]?.price}
+                    productPhotoUrl={products[0]?.image_url}
+                    isNew
+                  />
+                  <Categories />
+                </View>
+              )}
+              keyExtractor={item => item.id}
+              ListFooterComponent={<View />}
+              ListFooterComponentStyle={{
+                height: 80,
+              }}
+              renderItem={({ item }) => {
+                const productImageUri = { uri: item.image_url };
+                const productPrice = formatValue(item.price);
 
-              return (
-                <Product>
-                  <ProductImage source={productImageUri} />
-                  <ProductTitle>{item.title}</ProductTitle>
-                  <PriceContainer>
-                    <ProductPrice>{productPrice}</ProductPrice>
-                    <ProductButton
-                      testID={`add-to-cart-${item.id}`}
-                      onPress={handleAddToCart(item)}
-                    >
-                      <FeatherIcon size={20} name="plus" color="#C4C4C4" />
-                    </ProductButton>
-                  </PriceContainer>
-                </Product>
-              );
-            }}
-          />
+                return (
+                  <Product>
+                    <ProductImage source={productImageUri} />
+                    <ProductTitle>{item.title}</ProductTitle>
+                    <PriceContainer>
+                      <ProductPrice>{productPrice}</ProductPrice>
+                      <ProductButton
+                        testID={`add-to-cart-${item.id}`}
+                        onPress={handleAddToCart(item)}
+                      >
+                        <FeatherIcon size={20} name="plus" color="#C4C4C4" />
+                      </ProductButton>
+                    </PriceContainer>
+                  </Product>
+                );
+              }}
+            />
+          </Animated.View>
         </ProductContainer>
         <FloatingCart />
       </MainContainer>
