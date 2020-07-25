@@ -14,7 +14,7 @@ This project is MIT-licensed, and this means that you can implement and use what
 
 ## Commits and Code Padronization
 
-This project follow the [Conventinal Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+This project follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
 ## Bug reports
 
