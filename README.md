@@ -65,7 +65,7 @@ Run the following command in order to start the application in a development env
   react-native run-android
 
   // Install the application in a IOS device
-  react-native run-android
+  react-native run-ios
 
   // Start the mobile application as well the fake server to retrieve products data
   yarn dev
