@@ -18,7 +18,7 @@
     "@react-navigation/stack": "^5.2.10",
     "@rooks/use-did-mount": "^3.6.0",
     "@types/pluralize": "^0.0.29",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "immer": "^6.0.9",
     "intl": "^1.2.5",
     "json-server": "^0.16.1",
